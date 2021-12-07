@@ -17,6 +17,16 @@ export default function App() {
   
     await fetch(requestParams.url, {
       method: requestParams.method,
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: requestParams.body ? JSON.stringify(requestParams.body) : null,
     })
       .then((response) => {
         return response.json();
