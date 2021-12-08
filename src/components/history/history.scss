@@ -1,0 +1,43 @@
+#container {
+    background-color: #925f00;
+    height: fit-content;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .sub-container {
+    margin: 15px auto;
+    cursor: pointer;
+    height: fit-content;
+  }
+  
+  span {
+    padding: 0.2rem 0.2rem;
+    border-radius: 10px;
+    margin: 0px 5px;
+    color: white;
+  }
+  
+  #GET {
+    background-color: blue;
+  }
+  
+  #POST {
+    background-color: green;
+  }
+  
+  #PUT {
+    background-color: rgb(184, 184, 1);
+  }
+  
+  #DELETE {
+    background-color: red;
+  }
+  
+  h2 {
+    border-bottom: 4px solid white;
+    padding-bottom: 10px;
+    text-align: center;
+    color: white;
+  }

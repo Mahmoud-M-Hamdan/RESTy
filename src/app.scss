@@ -6,6 +6,15 @@ html, body {
   padding: 0;
 }
 
+.boody{
+  
+  margin-left: 25px;
+  display: flex;
+  flex-direction: row;
+
+
+}
+
 body {
   background: $backgroundColor;
   height: 100%;
@@ -16,19 +25,8 @@ body {
     height: 100%;
   }
 
-  footer {
-    background: darken($backgroundColor, 50);
-    border-top: 1px solid #eee;
-    padding: 1em 3em;
-    margin: 0;
-  }
 
-  header {
-    background: darken($backgroundColor, 75);
-    border-bottom: 1px solid #eee;
-    color: #eee;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-  }
+
+
+
 }

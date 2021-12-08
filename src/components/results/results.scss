@@ -1,0 +1,16 @@
+
+$mainFont: Verdana, Geneva, Tahoma, sans-serif;
+$background: rgb(184, 53, 71);
+$shadow: 5px 5px 10px #fc8804;
+
+.response {
+    background-color: #f68493;
+    box-shadow: 5px 5px 10px #b13428;
+  border-radius: 10px;
+  width: fit-content;
+  padding: 20px;
+  margin: 20px auto;
+  font-family: $mainFont;
+  font-weight: 500;
+  color: #000;
+}

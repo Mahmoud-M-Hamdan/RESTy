@@ -1,28 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 
 import "./form.scss";
 
-export default function Form(props) {
-  const [method, setMethod] = useState("GET");
-  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon");
+// **************************************************
 
-  const [body, setBody] = useState(null);
+const initialState = {
+  method: "",
+  url: "",
+  body: null,
+};
 
-  const methodHandle = (e) => {
-    console.log(e.target.id);
-    setMethod(e.target.id.toUpperCase());
+function stateReducer(state = initialState, action) {
+  switch (action.type) {
+    case "method":
+      return methodHandle(state, action.payload);
+
+    case "url":
+      return { ...state, url: action.payload };
+
+    case "body":
+      return { ...state, body: action.payload };
+
+    default:
+      return state;
+  }
+}
+
+const methodHandle = (state, payload) => {
+  // console.log("in methodHAndle function");
+  return {
+    ...state,
+    method: payload,
   };
+};
+
+// **************************************************
+
+export default function Form(props) {
+  const [requestState, dispatch] = useReducer(stateReducer, initialState);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(body)
-
-    setUrl(e.target.url.value);
     const formData = {
-      method: method,
-      // url: "https://pokeapi.co/api/v2/pokemon",
-      url: url,
-      body:body
+      method: requestState.method,
+      url: requestState.url,
+      data: requestState.body ? JSON.parse(requestState.body) : null,
     };
     props.handleApiCall(formData);
   };
@@ -36,32 +58,73 @@ export default function Form(props) {
             type="text"
             placeholder="ENTER URL"
             data-testid="url"
-            defaultValue="https://pokeapi.co/api/v2/pokemon"
+            onChange={(e) =>
+              dispatch({
+                type: "url",
+                payload: e.target.value,
+              })
+            }
           />
-        
-          <button type="submit" data-testid="submit">
-            GO!
-          </button>
-
         </label>
-        <textarea placeholder="fill me" onChange={(e)=>setBody(e.target.value) }></textarea>
-
+        <textarea
+          placeholder="Write Here my Dear 😍😁"
+          onChange={(e) =>
+            dispatch({
+              type: "body",
+              payload: e.target.value,
+            })
+          }
+        ></textarea>
         <div className="methods">
-          <span id="get" onClick={methodHandle}>
-            GET
+          <span
+            id={requestState.method === "GET" ? "clicked-button" : "get"}
+            onClick={() => {
+              dispatch({
+                type: "method",
+                payload: "GET",
+              });
+            }}
+          >
+            GET 😀
           </span>
-          <span id="post" onClick={methodHandle}>
-            POST
+          <span
+            id={requestState.method === "POST" ? "clicked-button" : "post"}
+            onClick={() => {
+              dispatch({
+                type: "method",
+                payload: "POST",
+              });
+            }}
+          >
+            POST 😁
           </span>
-          <span id="put" onClick={methodHandle}>
-            PUT
+          <span
+            id={requestState.method === "PUT" ? "clicked-button" : "put"}
+            onClick={() => {
+              dispatch({
+                type: "method",
+                payload: "PUT",
+              });
+            }}
+          >
+            PUT 🤩
           </span>
-          <span id="delete" onClick={methodHandle}>
-            DELETE
+          <span
+            id={requestState.method === "DELETE" ? "clicked-button" : "delete"}
+            onClick={() => {
+              dispatch({
+                type: "method",
+                payload: "DELETE",
+              });
+            }}
+          >
+            DELETE 😐
           </span>
+          <button type="submit" data-testid="submit">
+            GO 🏃 😎
+          </button>
         </div>
       </form>
     </>
   );
 }
-
